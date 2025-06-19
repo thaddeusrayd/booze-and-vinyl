@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booze &amp; Vinyl</title>
+</head>
+<body>
+    <h1>Booze &amp; Vinyl</h1>
+    <p>Welcome to the Booze &amp; Vinyl app!</p>
+    <h2>Want to contribute?</h2>
+    <p id="mostNeeded"></p> 
+    <h3>Other ingredients by order of need:</h3>
+    <p id="ingredients"></p>
+    <form id="contributionForm">
+        <label for ="ingredient"></label>
+        <input type="radio" name="ingredient" value="Lime Juice"> Lime Juice<br>
+        <input type="radio" name="ingredient" value="Mezcal"> Mezcal<br>
+        <input type="radio" name="ingredient" value="Aperol"> Aperol<br>
+        <input type="radio" name="ingredient" value="Genepy"> Genepy<br>
+        <label for="amount">Amount (if bringing fresh limes, assume 1oz. per lime):<br> 
+        <input type="number" id="amount" name="amount" min="0"><br>
+        <label for="unit">Unit:</label>
+        <input type="radio" name="unit" value="oz"> oz 
+        <input type="radio" name="unit" value="ml"> ml<br>
+        <button type="button" onclick="updateIngredientList()">Submit Contribution</button> 
+    </form>
+
+<script type="text/javascript">
+
+let ingredients = [
+  {
+    ingredient: "Lime Juice",
+    amountAcquired: 2,
+    amountNeeded: 0.5,
+    unit: "oz",
+  },
+  {
+    ingredient: "Mezcal",
+    amountAcquired: 0,
+    amountNeeded: 2,
+    unit: "oz",
+  },
+  {
+    ingredient: "Aperol",
+    amountAcquired: 0.5,
+    amountNeeded: 1,
+    unit: "oz",
+  },
+  {
+    ingredient: "Genepy",
+    amountAcquired: 10,
+    amountNeeded: 1,
+    unit: "oz",
+  },
+];
+
+let results = [];
+
+ingredients.forEach((i) => {
+  let percentageAcquired = (i.amountAcquired / i.amountNeeded) * 100;
+  results.push(
+    i.ingredient +
+      ": " +
+      i.amountAcquired +
+      " " +
+      i.unit +
+      " / " +
+      i.amountNeeded +
+      " " +
+      i.unit +
+      ", " +
+      percentageAcquired +
+      "%"
+  );
+});
+
+function rankIngredients() {
+    return ingredients.sort((a, b) => {
+        return a.amountAcquired / a.amountNeeded - b.amountAcquired / b.amountNeeded;
+    });
+}
+let mostNeeded = rankIngredients()[0];
+
+document.getElementById("mostNeeded").innerHTML = "Most needed ingredient: " + mostNeeded.ingredient;
+document.getElementById("ingredients").innerHTML = rankIngredients().map(i => i.ingredient).slice(1).join("<br>");
+
+async function updateIngredientList() {
+    let ingredient = document.querySelector('input[name="ingredient"]:checked')?.value;
+    let unit = document.querySelector('input[name="unit"]:checked')?.value;
+    let amount = document.getElementById("amount").value;
+
+    if (!ingredient || !unit || !amount) {
+        alert("Please select an ingredient, unit, and amount.");
+        return;
+    }
+
+    const ozAmount = unit === "ml" ? amount / 29.5735 : Number(amount);
+    
+    const res = await fetch('http://localhost:3000/contributions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ingredient, amountOz: ozAmount })       
+    })
+
+    if (!res.ok) {
+        alert("Server said: " + await res.text());
+        return;
+    }
+
+    await fetchIngredients();
+   
+    document.getElementById("contributionForm").reset();
+    alert("Thank you for your contribution of " + amount + " " + unit + " of " + ingredient + "!");
+}
+
+async function fetchIngredients() {
+    const res = await fetch('http://localhost:3000/ingredients');
+    const list = await res.json();
+
+    ingredients = list;
+    mostNeeded = rankIngredients()[0];
+
+    document.getElementById("mostNeeded").innerHTML = "Most needed ingredient: " + mostNeeded.ingredient;
+    document.getElementById("ingredients").innerHTML = rankIngredients().map(i => i.ingredient).slice(1).join("<br>");
+}
+
+fetchIngredients();
+
+</script>
+</body>
+</html>
