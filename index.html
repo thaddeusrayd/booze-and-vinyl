@@ -77,20 +77,20 @@
     async function updateIngredientList() {
       const ingredient = document.querySelector('input[name="ingredient"]:checked')?.value;
       const unit = document.querySelector('input[name="unit"]:checked')?.value;
-      const amountRaw = document.getElementById("amount").value;
+      const amount = document.getElementById("amount").value;
 
-      if (!ingredient || !unit || !amountRaw) {
+      if (!ingredient || !unit || !amount) {
         alert("Please select an ingredient, unit, and amount.");
         return;
       }
 
-      const amountOz = unit === "ml" ? amountRaw / 29.5735 : Number(amountRaw);
+      const ozAmount = unit === "ml" ? amount / 29.5735 : Number(amount);
 
       try {
         const res = await fetch("http://localhost:3000/contributions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ingredient, amountOz }),
+          body: JSON.stringify({ ingredient, ozAmount }),
         });
 
         if (!res.ok) {
@@ -100,7 +100,7 @@
 
         await fetchIngredients(); // re-render with fresh data
         document.getElementById("contributionForm").reset();
-        alert(`Thanks for bringing ${amountRaw} ${unit} of ${ingredient}!`);
+        alert(`Thanks for bringing ${amount} ${unit} of ${ingredient}!`);
       } catch (err) {
         console.error(err);
         alert("Network error—check console for details.");
