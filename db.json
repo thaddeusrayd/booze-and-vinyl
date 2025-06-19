@@ -1,0 +1,8 @@
+{
+  "ingredients": [
+    { "ingredient": "Lime Juice", "amountAcquired": 2, "amountNeeded": 0.5, "unit": "oz" },
+    { "ingredient": "Mezcal",     "amountAcquired": 0, "amountNeeded": 2,   "unit": "oz" },
+    { "ingredient": "Aperol",     "amountAcquired": 0.5, "amountNeeded": 1, "unit": "oz" },
+    { "ingredient": "Genepy",     "amountAcquired": 10, "amountNeeded": 1,  "unit": "oz" }
+  ]
+}
