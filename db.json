@@ -2,25 +2,25 @@
   "ingredients": [
     {
       "ingredient": "Lime Juice",
-      "amountAcquired": 12,
+      "amountAcquired": 20,
       "amountNeeded": 0.5,
       "unit": "oz"
     },
     {
       "ingredient": "Mezcal",
-      "amountAcquired": 26.360542377466313,
+      "amountAcquired": 77.08162713239894,
       "amountNeeded": 2,
       "unit": "oz"
     },
     {
       "ingredient": "Aperol",
-      "amountAcquired": 0.5,
+      "amountAcquired": 51.221084754932626,
       "amountNeeded": 1,
       "unit": "oz"
     },
     {
       "ingredient": "Genepy",
-      "amountAcquired": 10,
+      "amountAcquired": 30,
       "amountNeeded": 1,
       "unit": "oz"
     }
