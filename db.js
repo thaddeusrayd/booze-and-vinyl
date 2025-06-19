@@ -1,10 +1,9 @@
-import { Low } from "lowdb";
-import { JSONFile } from "lowdb/node";
+import { readFile } from "node:fs/promises";
 
-const adapter = new JSONFile("db.json");
-const db = new Low(adapter);
+const DB_PATH = "./db.json";
 
-await db.read();
-db.data ||= { ingredients: [] };
-
-export default db;
+export async function readIngredients() {
+  const text = await readFile(DB_PATH, "utf-8").catch(() => "{}");
+  const data = text ? JSON.parse(text) : {};
+  return data.ingredients ?? [];
+}

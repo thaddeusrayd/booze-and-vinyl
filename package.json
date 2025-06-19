@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lowdb": "^7.0.1"
+    "lowdb": "^5.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "steno": "3.2.0"
+  }
 }
