@@ -69,14 +69,18 @@
 
 
   <form id="contributionForm">
-    <label class="text-3xl" for="ingredient">Ingredient:</label><br>
-    <input type="radio" name="ingredient" value="White Rum" /> White Rum<br />
-    <input type="radio" name="ingredient" value="Cointreau" /> Cointreau<br />
-    <input type="radio" name="ingredient" value="Lime Juice" /> Lime Juice<br />
-    <input type="radio" name="ingredient" value="Maraschino Liqueur" /> Maraschino Liqueur<br />
-    <input type="radio" name="ingredient" value="Simple Syrup" /> Simple Syrup<br />
-    <input type="radio" name="ingredient" value="Club Soda" /> Club Soda<br />
-    <br>
+    <label for="ingredient" class="block text-3xl mb-2">Ingredient:</label>
+
+<select id="ingredient"
+        class="w-full max-w-xs text-black rounded px-2 py-1">
+  <option value="" disabled selected>Select an ingredient</option>
+  <option>White Rum</option>
+  <option>Cointreau</option>
+  <option>Lime Juice</option>
+  <option>Maraschino Liqueur</option>
+  <option>Simple Syrup</option>
+  <option>Club Soda</option>
+</select>
     <label class="text-3xl" for="amount"
       >Amount:</label
     ><br />
@@ -166,7 +170,7 @@
     fetchIngredients();
   </script>
   <script>
-    const sunset   = document.getElementById('sunset');
+  const sunset   = document.getElementById('sunset');
   const hotel    = document.getElementById('hotel');
   const sun      = document.getElementById('sun');
   const curtain  = document.getElementById('curtain');
