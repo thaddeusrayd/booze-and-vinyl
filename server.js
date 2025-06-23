@@ -9,9 +9,8 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
-app.get("/ingredients", async (req, res) => {
-  const ingredients = await readIngredients();
-  res.json(ingredients);
+app.get("/ingredients", async (_req, res) => {
+  res.json(await readIngredients());
 });
 
 app.post("/contributions", async (req, res) => {
