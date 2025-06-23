@@ -2,6 +2,11 @@ import express from "express";
 import { readIngredients, saveIngredients } from "./db.js";
 import cors from "cors";
 
+app.use((req, _res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
