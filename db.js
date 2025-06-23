@@ -1,21 +1,21 @@
-import { access } from "node:fs";
-import { readFile } from "node:fs/promises";
-import { writeFile } from "node:fs/promises";
+// db.js
+import { readFile, writeFile, cp, access } from "node:fs/promises";
+import path from "node:path";
 
-const DB_PATH = process.env.DB_PATH ?? "./db.json";
-const SEED_PATH = path.resolve("./db.json");
+const DB_PATH = process.env.DB_PATH ?? "/app/data/db.json"; // volume path
+const SEED_PATH = path.resolve("./db.json"); // repo copy
 
-async function ensureFeed() {
+async function ensureSeed() {
   try {
-    await access(DB_PATH);
+    await access(DB_PATH); // already exists?  do nothing
   } catch {
-    await cp(SEED_PATH, DB_PATH);
-    console.log("Database seeded from default file.");
+    await cp(SEED_PATH, DB_PATH); // copy once
+    console.log("Seeded db.json into volume");
   }
 }
 
 export async function readIngredients() {
-  await ensureFeed();
+  await ensureSeed();
   const text = await readFile(DB_PATH, "utf-8");
   return JSON.parse(text).ingredients ?? [];
 }
