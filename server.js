@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/ingredients", async (_req, res) => {
+  console.log("ingredients handler reached");
   res.json(await readIngredients());
 });
 
