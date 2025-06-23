@@ -65,7 +65,7 @@
 
     async function fetchIngredients() {
       try {
-        const res = await fetch("/ingredients");
+        const res = await fetch("/ingredients", { cache: "no-store"});
         ingredients = await res.json();
         render(ingredients);
       } catch (err) {
