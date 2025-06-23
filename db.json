@@ -1,27 +1,39 @@
 {
   "ingredients": [
     {
+      "ingredient": "White Rum",
+      "amountAcquired": 0,
+      "amountNeeded": 4,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Cointreau",
+      "amountAcquired": 0,
+      "amountNeeded": 0.75,
+      "unit": "oz"
+    },
+    {
       "ingredient": "Lime Juice",
-      "amountAcquired": 20,
-      "amountNeeded": 0.5,
+      "amountAcquired": 0,
+      "amountNeeded": 1.5,
       "unit": "oz"
     },
     {
-      "ingredient": "Mezcal",
-      "amountAcquired": 77.08162713239894,
+      "ingredient": "Maraschino Liqueur",
+      "amountAcquired": 0,
+      "amountNeeded": 0.083,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Simple Syrup",
+      "amountAcquired": 0,
+      "amountNeeded": 0.75,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Club Soda",
+      "amountAcquired": 0,
       "amountNeeded": 2,
-      "unit": "oz"
-    },
-    {
-      "ingredient": "Aperol",
-      "amountAcquired": 51.221084754932626,
-      "amountNeeded": 1,
-      "unit": "oz"
-    },
-    {
-      "ingredient": "Genepy",
-      "amountAcquired": 55.36054237746632,
-      "amountNeeded": 1,
       "unit": "oz"
     }
   ]
