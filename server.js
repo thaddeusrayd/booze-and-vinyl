@@ -3,8 +3,9 @@ import { readIngredients, saveIngredients } from "./db.js";
 import cors from "cors";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.port ?? 3000;
 
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
@@ -14,9 +15,9 @@ app.get("/ingredients", async (req, res) => {
 });
 
 app.post("/contributions", async (req, res) => {
-  const { ingredient, amountOz } = req.body;
+  const { ingredient, ozAmount } = req.body;
 
-  if (!ingredient || !amountOz) {
+  if (!ingredient || !ozAmount) {
     return res
       .status(400)
       .json({ error: "Ingredient and amount are required" });
@@ -26,11 +27,11 @@ app.post("/contributions", async (req, res) => {
   const item = bar.find((i) => i.ingredient === ingredient);
 
   if (item) {
-    item.amountAcquired += Number(amountOz);
+    item.amountAcquired += Number(ozAmount);
   } else {
     bar.push({
       ingredient,
-      amountAcquired: Number(amountOz),
+      amountAcquired: Number(ozAmount),
       amountNeeded: 1,
       unit: "oz",
     });

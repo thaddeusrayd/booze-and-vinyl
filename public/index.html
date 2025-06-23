@@ -65,7 +65,7 @@
 
     async function fetchIngredients() {
       try {
-        const res = await fetch("http://localhost:3000/ingredients");
+        const res = await fetch("/ingredients");
         ingredients = await res.json();
         render(ingredients);
       } catch (err) {
@@ -87,7 +87,7 @@
       const ozAmount = unit === "ml" ? amount / 29.5735 : Number(amount);
 
       try {
-        const res = await fetch("http://localhost:3000/contributions", {
+        const res = await fetch("/contributions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ingredient, ozAmount }),
