@@ -10,7 +10,6 @@ app.use((req, _res, next) => {
   next();
 });
 
-app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 
@@ -44,6 +43,8 @@ app.post("/contributions", async (req, res) => {
   await saveIngredients(bar);
   res.json(bar);
 });
+
+app.use(express.static("public"));
 
 app.listen(PORT, () => {
   console.log(`Booze & Vinyl server is running on http://localhost:${PORT}`);
