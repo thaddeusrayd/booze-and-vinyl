@@ -65,6 +65,7 @@
 
   <h3 class="text-2xl md:text-4xl mb-8">Care to contribute? We could use it. <br> Here are the most needed ingredients right now:</h3>  
   <p id="mostNeeded" class="text-3xl mb-4"></p>
+  <p class="text-2xl mb-8">Others, by need:</p>
   <p id="ingredients" class="text-xl"></p>
     <br>
 
@@ -115,7 +116,7 @@
       document.getElementById("mostNeeded").textContent =
         `Most needed ingredient: ${mostNeeded.ingredient}`;
 
-      document.getElementById("ingredients").innerHTML = `Other, in order of need: " ${others.map((i) => i.ingredient).join("<br>")}`
+      document.getElementById("ingredients").innerHTML = others.map((i) => i.ingredient).join("<br>");
     }
 
     // --- API calls ---
