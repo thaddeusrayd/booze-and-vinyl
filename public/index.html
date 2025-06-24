@@ -57,12 +57,12 @@
                 lg:w-1/2
                 max-w-none
                 z-30"
-         style="transform:translateY(0vh); will-change:transform"
+         style="will-change:transform"
          alt="Hotel California">
 
     <!-- <div id="curtain" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-20"></div> -->
 
-  <section id="content" class="relative z-30 min-h-screen bg-[#16151a] text-white px-8 pb-8 max-w-xl mx-auto text-center" style="transform:translateY(100vh); will-change:transform;">
+  <section id="content" class="relative z-30 min-h-screen bg-[#16151a] text-white px-8 pb-8 max-w-xl mx-auto text-center" style="will-change:transform;">
   <h1 class="text-5xl md:text-6xl font-bold mb-6">Booze &amp; Vinyl Vol. 1</h1>
   <h2 class="text-4xl md:text-5xl mb-4">Friday, June 27, 2025</h2>
   <h3 class="text-2xl md:text-4xl mb-8">Arrive any time after 6:00pm. Needle drops at 7.</h3>
@@ -187,18 +187,20 @@
     return Math.min(1, Math.max(0, 1 - r.bottom / window.innerHeight));
   }
 
-  const startOffset = 80;
+  const startPx = window.innerHeight;
 
-  hotel.style.transform   = `translateX(-50%) translateY(${startOffset}vh)`;
-content.style.transform = `translateY(${startOffset}vh)`;
+  hotel.style.transform   = `translateX(-50%) translateY(${startPx}px)`;
+content.style.transform = `translateY(${startPx}px)`;
 
   function onScroll() {
-  const rect = sunset.getBoundingClientRect();
-  const p    = Math.min(1, Math.max(0, 1 - rect.bottom / innerHeight));
+  const r = sunset.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, 1 - r.bottom / innerHeight));
+
+  const y = (1-p) * startPx;
 
   /*  hotel only moves — never fades  */
-hotel.style.transform   = `translateX(-50%) translateY(${(1 - p) * startOffset}vh)`;
-  content.style.transform = `translateY(${(1 - p) * startOffset}vh)`;
+  hotel.style.transform   = `translateX(-50%) translateY(${y}px)`;
+  content.style.transform = `translateY(${y}px)`;
   /*  sun & curtain fades  */
   sun.style.opacity     = 1 - Math.max(0, (p - 0.35) * 3);
   //curtain.style.opacity = Math.max(0, (p - .75) * 2);
