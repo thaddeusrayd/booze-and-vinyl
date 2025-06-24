@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Booze &amp; Vinyl</title>
+  <link rel="icon" href="img/cocktail-icon.png" type="image/png"/>
  <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
 
@@ -208,5 +209,40 @@ hotel.style.transform = `translateX(-50%) translateY(${(.25 - p) * 100}vh)`;
   document.addEventListener('scroll', onScroll, { passive:true });
   onScroll();                // run once on load
   </script>
+  <!-- background audio (auto-loops) -->
+<audio id="bg-audio" src="music/1 - Hotel California.mp3" loop preload="auto"></audio>
+
+<!-- optional “Play music” button -->
+<button id="playBtn"
+        class="fixed top-4 right-4 bg-amber-600 text-white px-4 py-2 rounded">
+  ▶ Play
+</button>
+<script>
+const audio   = document.getElementById('bg-audio');
+audio.volume = 0.3;
+const playBtn = document.getElementById('playBtn');
+
+// most browsers block autoplay with sound, so start on first click
+function startMusic() {
+  audio.play().then(() => {
+    playBtn.textContent = '⏸ Pause';
+  });
+  window.removeEventListener('click', startMusic);
+}
+
+playBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.textContent = '⏸ Pause';
+  } else {
+    audio.pause();
+    playBtn.textContent = '▶ Play';
+  }
+});
+
+// any first click (including the play button) unlocks autoplay
+window.addEventListener('click', startMusic, { once: true });
+</script>
+
 </body>
 </html>
