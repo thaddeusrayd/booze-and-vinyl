@@ -14,7 +14,7 @@
     },
     {
       "ingredient": "Lime Juice",
-      "amountAcquired": 4,
+      "amountAcquired": 12,
       "amountNeeded": 1.5,
       "unit": "oz"
     },
@@ -32,7 +32,7 @@
     },
     {
       "ingredient": "Club Soda",
-      "amountAcquired": 0,
+      "amountAcquired": 60,
       "amountNeeded": 2,
       "unit": "oz"
     }
