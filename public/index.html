@@ -187,7 +187,10 @@
     return Math.min(1, Math.max(0, 1 - r.bottom / window.innerHeight));
   }
 
-  const startOffset = 100;
+  const startOffset = 80;
+
+  hotel.style.transform   = `translateX(-50%) translateY(${startOffset}vh)`;
+content.style.transform = `translateY(${startOffset}vh)`;
 
   function onScroll() {
   const rect = sunset.getBoundingClientRect();
@@ -195,15 +198,14 @@
 const p = Math.min(1, Math.max(0, 1 - sunset.getBoundingClientRect().bottom / innerHeight));
 
   /*  hotel only moves — never fades  */
-hotel.style.transform = `translateX(-50%) translateY(${(.25 - p) * 100}vh)`;
-
+hotel.style.transform   = `translateX(-50%) translateY(${(1 - p) * startOffset}vh)`;
+  content.style.transform = `translateY(${(1 - p) * startOffset}vh)`;
   /*  sun & curtain fades  */
   sun.style.opacity     = 1 - Math.max(0, (p - 0.35) * 3);
   //curtain.style.opacity = Math.max(0, (p - .75) * 2);
 
   /*  content reveal (if you kept it)  */
   const topOut = Math.max(0, -rect.top / winH);
-  content.style.transform = `translateY(${(.25 - p) * 100}vh)`;
 }
 
   document.addEventListener('scroll', onScroll, { passive:true });
