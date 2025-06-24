@@ -194,8 +194,7 @@ content.style.transform = `translateY(${startOffset}vh)`;
 
   function onScroll() {
   const rect = sunset.getBoundingClientRect();
-  const winH = innerHeight;
-const p = Math.min(1, Math.max(0, 1 - sunset.getBoundingClientRect().bottom / innerHeight));
+  const p    = Math.min(1, Math.max(0, 1 - rect.bottom / innerHeight));
 
   /*  hotel only moves — never fades  */
 hotel.style.transform   = `translateX(-50%) translateY(${(1 - p) * startOffset}vh)`;
