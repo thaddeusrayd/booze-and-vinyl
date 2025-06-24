@@ -14,13 +14,13 @@
     },
     {
       "ingredient": "Lime Juice",
-      "amountAcquired": 0,
+      "amountAcquired": 4,
       "amountNeeded": 1.5,
       "unit": "oz"
     },
     {
       "ingredient": "Maraschino Liqueur",
-      "amountAcquired": 0,
+      "amountAcquired": 7,
       "amountNeeded": 0.083,
       "unit": "oz"
     },
