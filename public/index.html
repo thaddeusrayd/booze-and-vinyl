@@ -175,43 +175,52 @@
     fetchIngredients();
   </script>
   <script>
-  const sunset   = document.getElementById('sunset');
-  const hotel    = document.getElementById('hotel');
-  const sun      = document.getElementById('sun');
-  // const curtain  = document.getElementById('curtain');
-  const content  = document.getElementById('content');
+/* ---------- elements ---------- */
+const sunset  = document.getElementById('sunset');
+const hotel   = document.getElementById('hotel');
+const sun     = document.getElementById('sun');
+const content = document.getElementById('content');
 
-  /* how far hero has scrolled out of view (0 → 1) */
-  function progress() {
-    const r = sunset.getBoundingClientRect();
-    return Math.min(1, Math.max(0, 1 - r.bottom / window.innerHeight));
-  }
-
-  const startPx = window.innerHeight;
-
-  hotel.style.transform   = `translateX(-50%) translateY(${startPx}px)`;
-content.style.transform = `translateY(${startPx}px)`;
-
-  function onScroll() {
-  const r = sunset.getBoundingClientRect();
-  const p = Math.min(1, Math.max(0, 1 - r.bottom / innerHeight));
-
-  const y = (1-p) * startPx;
-
-  /*  hotel only moves — never fades  */
-  hotel.style.transform   = `translateX(-50%) translateY(${y}px)`;
-  content.style.transform = `translateY(${y}px)`;
-  /*  sun & curtain fades  */
-  sun.style.opacity     = 1 - Math.max(0, (p - 0.35) * 3);
-  //curtain.style.opacity = Math.max(0, (p - .75) * 2);
-
-  /*  content reveal (if you kept it)  */
-  const topOut = Math.max(0, -rect.top / winH);
+/* ---------- live viewport helper ---------- */
+function vh () {
+  // iOS Safari: visualViewport.height shrinks when chrome hides
+  return (window.visualViewport && visualViewport.height) || innerHeight;
 }
 
-  document.addEventListener('scroll', onScroll, { passive:true });
-  onScroll();                // run once on load
-  </script>
+/* ---------- place hotel & content off-screen ---------- */
+function setStartOffset () {
+  const offset = vh();                        // px
+  hotel.style.transform   = `translateX(-50%) translateY(${offset}px)`;
+  content.style.transform = `translateY(${offset}px)`;
+}
+setStartOffset();           // run once on load
+
+/* ---------- scroll handler ---------- */
+function onScroll () {
+  const heroRect = sunset.getBoundingClientRect();
+  const progress = Math.min(1, Math.max(0, 1 - heroRect.bottom / vh())); // 0→1
+
+  /* hotel & content move together */
+  const y = (1 - progress) * vh();
+  hotel.style.transform   = `translateX(-50%) translateY(${y}px)`;
+  content.style.transform = `translateY(${y}px)`;
+
+  /* sun fade (unchanged) */
+  sun.style.opacity = 1 - Math.max(0, (progress - 0.35) * 3);
+}
+
+document.addEventListener('scroll', onScroll, { passive: true });
+onScroll();                 // run once immediately
+
+/* ---------- update offsets if viewport height changes (Safari toolbar) ---------- */
+if (window.visualViewport) {
+  visualViewport.addEventListener('resize', () => {
+    setStartOffset();       // reposition off-screen
+    onScroll();             // and recalc frame
+  }, { passive: true });
+}
+</script>
+
   <!-- background audio (auto-loops) -->
 <audio id="bg-audio" src="music/1 - Hotel California.mp3" loop preload="auto"></audio>
 
