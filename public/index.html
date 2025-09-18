@@ -5,32 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Booze &amp; Vinyl</title>
   <link rel="icon" href="img/cocktail-icon.png" type="image/png"/>
- <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
 
 
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { 
-      font-family: 'Tangerine', cursive; 
-      color: #f3f4f6;
-    }
-    @keyframes hazy {
-      0% {
-        filter: blur(1.5px);
-        transform: scale(0.99);
-      }
-      50% {
-        filter: blur(6px);
-        transform: scale(1.01);
-      }
-      100% {
-        filter: blur(1.5px);
-        transform: scale(0.99);
-      }
-    }
-    .animate-hazy {
-        animation: hazy 3s ease-in-out infinite;
+      font-family: 'Oswald', sans-serif, extra-light; 
+      color: #e3a656;
     }
     .sticky-header   { position: relative; bottom: 0 !important; transform: none !important; }
     .push-down       { margin-top: var(--hotel-h); }
@@ -38,14 +21,11 @@
 </head>
 <body class="overflow-x-hidden bg-black">
   <section id="sunset" class="relative h-screen overflow-hidden">
-    <div class="fixed inset-0 flex items-center justify-center pointer-events-none -z-10">
-      <div id="sun"
-           class="w-[90vmin] h-[90vmin] md:w-[80vmin] md:h-[80vmin]
-                  rounded-full bg-gradient-to-b from-red-700 via-orange-700 to-amber-500
-                  animate-hazy"></div>
+      <div id="tracy-bg">
+        <img src="img/tracy-bg.png" class="w-full h-screen" alt="Tracy Chapman">
       </div>
-    <div class="absolute inset-0 bg-[linear-gradient(to_bottom,#F59E0B_0%,#DC2626_80%,transparent_100%)] -z-20"></div>
-      <div id="scrollCue" class="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/60 rounded-md backdrop-blur text-xl tracking-wider z-20 transition-opacity duration-300">Scroll down to set the sun.</div> 
+      </div>
+    <div class="absolute inset-0  -z-20"></div>
 
   </section>
     <!-- Hotel California album cover -->
@@ -62,10 +42,10 @@
 
     <!-- <div id="curtain" class="fixed inset-0 bg-black opacity-0 pointer-events-none z-20"></div> -->
 
-  <section id="content" class="relative z-30 min-h-screen bg-[#16151a] text-white p-8 max-w-xl mx-auto text-center" style="transform:translateY(100vh); will-change:transform;">
-  <h1 class="text-5xl md:text-6xl font-bold mb-6">Booze &amp; Vinyl Vol. 1</h1>
-  <h2 class="text-4xl md:text-5xl mb-4">Friday, June 27, 2025</h2>
-  <h3 class="text-2xl md:text-4xl mb-8">Arrive any time after 6:00pm. Needle drops at 7.</h3>
+  <section id="content" class="relative z-30 min-h-screen bg-[#16151a] p-8 max-w-xl mx-auto text-center" style="transform:translateY(100vh); will-change:transform;">
+  <h1 class="text-3xl md:text-6xl mb-6">B O O Z E &nbsp;&amp;&nbsp; V I N Y L &nbsp; V O L 2</h1>
+  <h2 class="text-2xl md:text-5xl mb-4">Saturday, September 27, 2025</h2>
+  <h3 class="text-l md:text-4xl mb-8">Arrive any time after 6:00pm. Needle drops at 7.</h3>
 
   <h3 class="text-2xl md:text-4xl mb-8">Care to contribute? We could use it. </h3>
   <p id="mostNeeded" class="text-3xl mb-4"></p>
@@ -79,12 +59,13 @@
 <select id="ingredient"
         class="w-40 mx-auto text-black rounded px-2 py-1">
   <option value="" disabled selected>Select an ingredient</option>
-  <option>White Rum</option>
+  <option>Brandy</option>
+  <option>Vodka</option>
+  <option>Kahlúa</option>
   <option>Cointreau</option>
-  <option>Lime Juice</option>
-  <option>Maraschino Liqueur</option>
   <option>Simple Syrup</option>
-  <option>Club Soda</option>
+  <option>Aged Rum</option>
+  <option>Bourbon</option>
 </select><br><br>
     <label class="text-3xl" for="amount"
       >Amount:</label
@@ -94,13 +75,12 @@
     <input type="radio" name="unit" value="oz" /> oz
     <input type="radio" name="unit" value="ml" /> ml<br /><br />
     </div>
-        <p class="text-2xl">If you plan to bring fresh limes to juice, you're very fancy. Assume 1oz. per lime.</p>
-      <br>  
       <br>
     <button class="text-3xl" type="button" onclick="updateIngredientList()">Submit Contribution</button>
   </form>
   </section>
   <script type="text/javascript">
+    
     // --- state ---
     let ingredients = []; // populated after first fetch
 
@@ -177,7 +157,7 @@
   <script>
   const sunset   = document.getElementById('sunset');
   const hotel    = document.getElementById('hotel');
-  const sun      = document.getElementById('sun');
+  const tracyBg      = document.getElementById('tracy-bg');
   // const curtain  = document.getElementById('curtain');
   const content  = document.getElementById('content');
 
@@ -211,11 +191,11 @@ hotel.style.transform   = `translateX(-50%) translateY(${(1 - p) * startOffset}v
   onScroll();                // run once on load
   </script>
   <!-- background audio (auto-loops) -->
-<audio id="bg-audio" src="music/1 - Hotel California.mp3" loop preload="auto"></audio>
+<audio id="bg-audio" src="music/06 - Fast Car.mp3" loop preload="auto"></audio>
 
 <!-- optional “Play music” button -->
 <button id="playBtn"
-        class="fixed top-4 right-4 bg-amber-600 text-white px-4 py-2 rounded">
+        class="fixed top-4 right-4 bg-white text-black px-4 py-2 rounded">
   ▶ Play
 </button>
 <script>

@@ -1,39 +1,45 @@
 {
   "ingredients": [
     {
-      "ingredient": "White Rum",
+      "ingredient": "Brandy",
       "amountAcquired": 0,
-      "amountNeeded": 4,
-      "unit": "oz"
-    },
-    {
-      "ingredient": "Cointreau",
-      "amountAcquired": 0,
-      "amountNeeded": 0.75,
-      "unit": "oz"
-    },
-    {
-      "ingredient": "Lime Juice",
-      "amountAcquired": 12,
       "amountNeeded": 1.5,
       "unit": "oz"
     },
     {
-      "ingredient": "Maraschino Liqueur",
-      "amountAcquired": 7,
-      "amountNeeded": 0.083,
+      "ingredient": "Vodka",
+      "amountAcquired": 0,
+      "amountNeeded": 0.5,
       "unit": "oz"
     },
     {
-      "ingredient": "Simple Syrup",
+      "ingredient": "Kahlúa",
       "amountAcquired": 0,
       "amountNeeded": 0.75,
       "unit": "oz"
     },
     {
-      "ingredient": "Club Soda",
-      "amountAcquired": 60,
-      "amountNeeded": 2,
+      "ingredient": "Cointreau",
+      "amountAcquired": 25,
+      "amountNeeded": 0.5,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Simple Syrup",
+      "amountAcquired": 20,
+      "amountNeeded": 0.5,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Aged Rum",
+      "amountAcquired": 0,
+      "amountNeeded": 1,
+      "unit": "oz"
+    },
+    {
+      "ingredient": "Bourbon",
+      "amountAcquired": 0,
+      "amountNeeded": 1,
       "unit": "oz"
     }
   ]
